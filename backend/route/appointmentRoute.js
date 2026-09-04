@@ -8,6 +8,7 @@ const {
   getAppointmentByIdController,
   updateAppointmentController,
   deleteAppointmentController,
+  getAppointmentByUserIdController
 } = require("../controller/appointmentController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -16,6 +17,8 @@ const authorizeRoles = require("../middleware/roleMiddleware");
 router.post("/appointment/add", authMiddleware, addAppointmentController);
 
 router.get("/appointment", authMiddleware, getAllAppointmentController);
+
+router.get("/appointment/user", authMiddleware,getAppointmentByUserIdController)
 
 router.get(
   "/appointment/:id",

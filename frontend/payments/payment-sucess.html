@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Booking Confirmed - Fresha</title>
+
+    <link rel="stylesheet" href="payment-success.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="success-icon">✓</div>
+
+      <h1>Booking Confirmed</h1>
+
+      <p class="subtitle">
+        Your salon appointment has been successfully booked.
+      </p>
+
+      <div class="details">
+        <div class="row">
+          <span>Order ID</span>
+          <p id="orderId">Loading...</p>
+        </div>
+
+        <div class="row">
+          <span>Payment Status</span>
+          <p id="status">Checking payment status...</p>
+        </div>
+
+        <div class="row">
+          <span>Appointment</span>
+          <p id="appointmentStatus">Checking...</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button
+          onclick="window.location.href = '../saloonWork/appointment.html'"
+        >
+          My Appointments
+        </button>
+
+        <button
+          class="secondary-button"
+          onclick="window.location.href = '../index.html'"
+        >
+          Back to Home
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="payment-success.js"></script>
+  </body>
+</html>

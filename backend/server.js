@@ -24,7 +24,7 @@ app.use("/", hairCuttingRoute);
 app.use("/", paymentsRoute);
 
 sequelize
-  .sync({ alter: true })
+  .sync()
   .then(() => {
     app.listen(port, () => {
       console.log("server is connected");

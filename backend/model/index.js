@@ -3,8 +3,8 @@ const Saloon = require("./saloonSchema");
 const User = require("./userSchema");
 const Review = require("./ReviewRatingsSchema");
 const Appointment = require("./appointmentSchema");
-const SaloonFacility = require("./saloonServiceSchema")
-const Payment = require("./paymentSchema")
+const SaloonFacility = require("./saloonServiceSchema");
+const Payment = require("./paymentSchema");
 
 // Saloon → Services
 Saloon.hasMany(SaloonFacility, {
@@ -60,7 +60,6 @@ Appointment.belongsTo(Saloon, {
   foreignKey: "saloonId",
 });
 
-
 SaloonFacility.hasMany(Appointment, {
   foreignKey: "serviceId",
 });
@@ -70,10 +69,18 @@ Appointment.belongsTo(SaloonFacility, {
 });
 
 User.hasMany(Payment, {
-  foreignKey : "userId"
+  foreignKey: "userId",
 });
 Payment.belongsTo(User, {
-  foreignKey : "userId"
+  foreignKey: "userId",
+});
+
+Payment.belongsTo(Appointment, {
+  foreignKey: "appointmentId",
+});
+
+Appointment.hasOne(Payment, {
+  foreignKey: "appointmentId",
 });
 
 module.exports = {
@@ -82,5 +89,5 @@ module.exports = {
   SaloonFacility,
   Review,
   Appointment,
-  Payment
+  Payment,
 };

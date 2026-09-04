@@ -1,8 +1,8 @@
-const {getPaymentStatus} = require("../service/paymentStoreService");
+const {getPaymentStatus} = require("../service/paymentService");
 const {
   successResponse,
   errorResponse,
-} = require("../middleware/responseHandle");
+} = require("../middleware/responseHandlingMiddleware");
 
 
 const getPaymentController= async(req,res)=>{

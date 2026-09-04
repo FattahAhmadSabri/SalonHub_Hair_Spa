@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.table-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #fafafa;
+}
+
+th {
+  text-align: left;
+  padding: 18px;
+  font-size: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+td {
+  padding: 18px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.loading,
+.empty,
+.error {
+  text-align: center;
+  padding: 30px;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.completed {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* =========================
+   CANCEL BUTTON
+========================= */
+
+.cancel-button {
+  border: 1px solid #d9534f;
+  background: white;
+  color: #d9534f;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background: #d9534f;
+  color: white;
+}
+
+.cancelled-text {
+  color: #777;
+  font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  .container {
+    width: 95%;
+    margin: 30px auto;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    white-space: nowrap;
+  }
+}

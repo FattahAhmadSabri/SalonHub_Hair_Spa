@@ -1,35 +1,30 @@
 <section class="container">
+  <link rel="stylesheet" href="../css/appointment.css" />
+  <h1>My Appointments</h1>
 
-    <h1>My Appointments</h1>
+  <p id="message" class="message"></p>
 
+  <div class="table-card">
     <table>
+      <thead>
+        <tr>
+          <th>Salon</th>
+          <th>Service</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
 
-        <thead>
-            <tr>
-                <th>Salon</th>
-                <th>Service</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody id="appointmentList">
-
-            <tr>
-                <td>Fresha Salon</td>
-                <td>Hair Cut</td>
-                <td>10 Sep 2026</td>
-                <td>10:30 AM</td>
-                <td>Confirmed</td>
-                <td>
-                    <button>Cancel</button>
-                </td>
-            </tr>
-
-        </tbody>
-
+      <tbody id="appointmentList">
+        <tr>
+          <td colspan="6" class="loading">Loading appointments...</td>
+        </tr>
+      </tbody>
     </table>
-
+  </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js/appointment.js"></script>

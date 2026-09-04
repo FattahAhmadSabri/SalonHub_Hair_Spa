@@ -4,7 +4,13 @@ const {
   getAppointmentByIdService,
   updateAppointmentService,
   deleteAppointmentService,
+  getAppointmentByUserIdService
 } = require("../service/appointmentService");
+
+const {
+  successResponse,
+  errorResponse,
+} = require("../middleware/responseHandlingMiddleware");
 
 const addAppointmentController = async (req, res) => {
   try {
@@ -37,6 +43,17 @@ const addAppointmentController = async (req, res) => {
     });
   }
 };
+
+const getAppointmentByUserIdController =async(req,res)=>{
+  try {
+       const userId =req.user.id 
+       const response = await getAppointmentByUserIdService(userId)
+       return successResponse(res, 200, "User appointment successfully", response);
+    
+  } catch (error) {
+    return errorResponse(res, 500, error.message);
+  }
+}
 
 
 const getAllAppointmentController = async (req, res) => {
@@ -131,4 +148,5 @@ module.exports = {
   getAppointmentByIdController,
   updateAppointmentController,
   deleteAppointmentController,
+  getAppointmentByUserIdController
 };

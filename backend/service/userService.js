@@ -49,16 +49,7 @@ const updateUserByIdService = (userId, name, password) => {
 };
 
 const getAllUsersService = async () => {
-  const response = await User.findAll({
-    where: {
-      role: "user",
-    },
-    include: [
-      {
-        model: Recipe,
-      },
-    ],
-  });
+  const response = await User.findAll();
 
   return response;
 };

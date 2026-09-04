@@ -1,15 +1,11 @@
-const {
-  Appointment,
-  Saloon,
-  SaloonFacility,
-} = require("../model/index");
+const { User, Appointment, Saloon, SaloonFacility } = require("../model/index");
 
 const addAppointmentService = async (
   userId,
   saloonId,
   serviceId,
   date,
-  startTime
+  startTime,
 ) => {
   const saloon = await Saloon.findByPk(saloonId);
 
@@ -49,7 +45,7 @@ const getAllAppointmentService = async () => {
         model: Saloon,
       },
       {
-        model: SaloonService,
+        model: SaloonFacility,
       },
     ],
   });
@@ -65,7 +61,7 @@ const getAppointmentByIdService = async (id) => {
         model: Saloon,
       },
       {
-        model: SaloonService,
+        model: SaloonFacility,
       },
     ],
   });
@@ -77,12 +73,31 @@ const getAppointmentByIdService = async (id) => {
   return appointment;
 };
 
-const updateAppointmentService = async (
-  id,
-  date,
-  startTime,
-  status
-) => {
+const getAppointmentByUserIdService = async (userId) => {
+  const appointments = await Appointment.findAll({
+    where: {
+      userId: userId,
+    },
+    include: [
+      {
+        model: Saloon,
+        attributes: ["id", "name", "city", "address"],
+      },
+      {
+        model: SaloonFacility,
+        attributes: ["id", "name", "price", "duration"],
+      },
+    ],
+    order: [
+      ["date", "ASC"],
+      ["startTime", "ASC"],
+    ],
+  });
+
+  return appointments;
+};
+
+const updateAppointmentService = async (id, date, startTime, status) => {
   const appointment = await Appointment.findByPk(id);
 
   if (!appointment) {
@@ -116,4 +131,5 @@ module.exports = {
   getAppointmentByIdService,
   updateAppointmentService,
   deleteAppointmentService,
+  getAppointmentByUserIdService,
 };

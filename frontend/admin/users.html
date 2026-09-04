@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Manage Users - Fresha</title>
+
+    <link rel="stylesheet" href="../css/admin.css" />
+
+    <link rel="stylesheet" href="../css/users.css" />
+  </head>
+
+  <body>
+    <div class="admin-layout">
+      <!-- SIDEBAR -->
+
+      <aside class="sidebar">
+        <div class="logo">fresha</div>
+
+        <nav class="sidebar-nav">
+          <a href="admin.html"> Dashboard </a>
+
+          <a href="admin.html"> Salons </a>
+
+          <a href="admin.html"> Services </a>
+
+          <a href="admin.html"> Appointments </a>
+
+          <a href="users.html" class="active"> Users </a>
+        </nav>
+
+        <button id="logoutButton" class="logout-button">Logout</button>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <h1>Users</h1>
+
+            <p>Manage Fresha users</p>
+          </div>
+
+          <div class="admin-user">Admin</div>
+        </header>
+
+        <!-- USER FORM -->
+
+        <section class="user-form-card">
+          <h2 id="formTitle">Add User</h2>
+
+          <p id="message" class="message"></p>
+
+          <form id="userForm">
+            <input type="hidden" id="userId" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name"> Name </label>
+
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Enter name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email"> Email </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone"> Phone </label>
+
+                <input
+                  type="text"
+                  id="phone"
+                  placeholder="Enter phone"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="role"> Role </label>
+
+                <select id="role">
+                  <option value="user">User</option>
+
+                  <option value="staff">Staff</option>
+
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" id="passwordGroup">
+              <label for="password"> Password </label>
+
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+              />
+            </div>
+
+            <div class="form-buttons">
+              <button type="submit" class="primary-button" id="saveButton">
+                Add User
+              </button>
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="cancelButton"
+                style="display: none"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- USERS TABLE -->
+
+        <section class="table-card users-card">
+          <div class="table-header">
+            <div>
+              <h2>All Users</h2>
+
+              <p id="userCount">0 users</p>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Phone</th>
+
+                <th>Role</th>
+
+                <th>Salon</th>
+
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="usersTable">
+              <tr>
+                <td colspan="6">Loading users...</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="../js/users.js"></script>
+  </body>
+</html>
