@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Fresha Admin Panel</title>
+
+    <link rel="stylesheet" href="./adminindex.css" />
+  </head>
+
+  <body>
+    <div class="admin-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo">fresha</div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item active" data-section="dashboard">
+            Dashboard
+          </a>
+
+          <a href="#" class="nav-item" data-section="salons"> Salons </a>
+
+          <a href="#" class="nav-item" data-section="services"> Services </a>
+
+          <a href="#" class="nav-item" data-section="appointments">
+            Appointments
+          </a>
+
+          <a href="#" class="nav-item" data-section="users"> Users </a>
+        </nav>
+
+        <button id="logoutButton" class="logout-button">Logout</button>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main-content">
+        <!-- HEADER -->
+        <header class="topbar">
+          <div>
+            <h1 id="pageTitle">Dashboard</h1>
+            <p>Welcome to Fresha Admin Panel</p>
+          </div>
+
+          <div class="admin-user">Admin</div>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section id="dashboardSection" class="section">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <p>Total Salons</p>
+              <h2 id="totalSalons">0</h2>
+            </div>
+
+            <div class="stat-card">
+              <p>Total Services</p>
+              <h2 id="totalServices">0</h2>
+            </div>
+
+            <div class="stat-card">
+              <p>Total Appointments</p>
+              <h2 id="totalAppointments">0</h2>
+            </div>
+
+            <div class="stat-card">
+              <p>Total Users</p>
+              <h2 id="totalUsers">0</h2>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="card-header">
+              <h2>Recent Activity</h2>
+            </div>
+
+            <div id="recentActivity">
+              <p class="empty">No recent activity.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SALONS -->
+        <section id="salonsSection" class="section hidden">
+          <div class="section-header">
+            <div>
+              <h2>Salons</h2>
+              <p>Manage registered salons.</p>
+            </div>
+
+            <button class="primary-button">+ Add Salon</button>
+          </div>
+
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>City</th>
+                  <th>Address</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="salonsTable">
+                <tr>
+                  <td colspan="4">Loading salons...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="servicesSection" class="section hidden">
+          <div class="section-header">
+            <div>
+              <h2>Services</h2>
+              <p>Manage salon services.</p>
+            </div>
+
+            <button class="primary-button">+ Add Service</button>
+          </div>
+
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Duration</th>
+                  <th>Salon</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="servicesTable">
+                <tr>
+                  <td colspan="5">Loading services...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- APPOINTMENTS -->
+        <section id="appointmentsSection" class="section hidden">
+          <div class="section-header">
+            <div>
+              <h2>Appointments</h2>
+              <p>Manage customer appointments.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th>Customer</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="appointmentsTable">
+                <tr>
+                  <td colspan="5">No appointments loaded.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- USERS -->
+        <section id="usersSection" class="section hidden">
+          <div class="section-header">
+            <div>
+              <h2>Users</h2>
+              <p>Manage registered users.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="usersTable">
+                <tr>
+                  <td colspan="5">No users loaded.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="./adminindex.js"></script>
+  </body>
+</html>

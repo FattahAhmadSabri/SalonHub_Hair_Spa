@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Salon Details</title>
+
+    <link rel="stylesheet" href="../css/saloon.css" />
+  </head>
+
+  <body>
+    <!-- ==========================================
+         NAVBAR
+    =========================================== -->
+
+    <header class="navbar">
+      <div class="logo">fresha</div>
+
+      <nav>
+        <a href="../index.html"> Home </a>
+
+        <a href="appointment.html"> Appointments </a>
+
+        <a href="../profile.html"> Profile </a>
+
+        <a href="../login.html" id="loginLink"> Log in </a>
+
+        <button id="logoutButton" class="logout-button" onclick="logout()">
+          Logout
+        </button>
+      </nav>
+    </header>
+
+    <!-- ==========================================
+         MAIN PAGE
+    =========================================== -->
+
+    <main class="page">
+      <!-- ======================================
+             SALON HEADER
+        ======================================= -->
+
+      <section id="saloonHeader" class="saloon-header">
+        <p class="loading">Loading salon...</p>
+      </section>
+
+      <!-- ======================================
+             IMAGE GALLERY
+        ======================================= -->
+
+      <section id="gallery" class="gallery">
+        <div class="gallery-main">
+          <div class="loading">Loading images...</div>
+        </div>
+
+        <div class="gallery-side">
+          <div class="gallery-image"></div>
+
+          <div class="gallery-image"></div>
+        </div>
+      </section>
+
+      <!-- ======================================
+             CONTENT + BOOKING
+        ======================================= -->
+
+      <div class="content-layout">
+        <!-- ==================================
+                 LEFT CONTENT
+            =================================== -->
+
+        <section class="main-content">
+          <!-- Services -->
+
+          <div class="section-header">
+            <h2>Services</h2>
+          </div>
+
+          <div id="serviceList" class="service-list">
+            <p class="loading">Loading services...</p>
+          </div>
+        </section>
+
+        <!-- ==================================
+                 RIGHT BOOKING CARD
+            =================================== -->
+
+        <aside class="booking-card">
+          <button class="book-now-button" id="bookNowButton">Book now</button>
+
+          <div class="booking-info">
+            <div class="info-row">
+              <span class="info-icon"> ◷ </span>
+
+              <div>
+                <strong> Opening hours </strong>
+
+                <p>Check availability while booking</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon"> 📍 </span>
+
+              <div>
+                <strong> Location </strong>
+
+                <p id="bookingLocation">Loading...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="package-section">
+            <strong> Book a service </strong>
+
+            <p>Choose a service below to book your appointment.</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- ==========================================
+         AXIOS
+    =========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script src="../js/saloon.js"></script>
+  </body>
+</html>

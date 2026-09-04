@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Register - Fresha</title>
+
+    <link rel="stylesheet" href="./css/register.css" />
+  </head>
+
+  <body>
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="logo">fresha</div>
+
+        <h1>Create your account</h1>
+
+        <p class="subtitle">Register to book salon appointments.</p>
+
+        <!-- Error / Success Message -->
+
+        <div id="message" class="message"></div>
+
+        <!-- Register Form -->
+
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="name"> Name </label>
+
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email"> Email </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone"> Phone </label>
+
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Enter your phone number"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password"> Password </label>
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Create a password"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword"> Confirm Password </label>
+
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="auth-button" id="registerButton">
+            Create account
+          </button>
+        </form>
+
+        <p class="auth-footer">
+          Already have an account?
+
+          <a href="./login.html"> Log in </a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Axios -->
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Authentication JS -->
+
+    <script src="./js/auth.js"></script>
+  </body>
+</html>

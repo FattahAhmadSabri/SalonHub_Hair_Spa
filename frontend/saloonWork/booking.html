@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Book Appointment</title>
+
+    <link rel="stylesheet" href="../css/booking.css" />
+  </head>
+
+  <body>
+
+    <!-- ==========================================
+         NAVBAR
+    =========================================== -->
+
+    <header class="navbar">
+
+      <div class="logo">
+        fresha
+      </div>
+
+      <nav>
+
+        <a href="../index.html">
+          Home
+        </a>
+
+        <a href="appointment.html">
+          Appointments
+        </a>
+
+        <a href="../profile.html">
+          Profile
+        </a>
+
+        <a href="../login.html">
+          Log in
+        </a>
+
+      </nav>
+
+    </header>
+
+
+    <!-- ==========================================
+         BOOKING
+    =========================================== -->
+
+    <main class="page">
+
+      <div class="form-container">
+
+        <h2>
+          Book Appointment
+        </h2>
+
+
+        <p id="saloonName" class="saloon-name">
+          Loading salon...
+        </p>
+
+
+        <form id="bookingForm">
+
+          <!-- SERVICE -->
+
+          <label for="serviceId">
+            Service
+          </label>
+
+          <select
+            id="serviceId"
+            required
+          >
+
+            <option value="">
+              Loading services...
+            </option>
+
+          </select>
+
+
+          <!-- DATE -->
+
+          <label for="date">
+            Date
+          </label>
+
+          <input
+            type="date"
+            id="date"
+            required
+          />
+
+
+          <!-- TIME -->
+
+          <label for="startTime">
+            Time
+          </label>
+
+          <input
+            type="time"
+            id="startTime"
+            required
+          />
+
+
+          <!-- MESSAGE -->
+
+          <p
+            id="message"
+            class="message"
+          ></p>
+
+
+          <!-- BUTTON -->
+
+          <button
+            class="btn"
+            type="submit"
+            id="bookButton"
+          >
+            Book Appointment
+          </button>
+
+        </form>
+
+      </div>
+
+    </main>
+
+
+    <!-- ==========================================
+         AXIOS
+    =========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    <!-- ==========================================
+         CASHFREE SDK
+    =========================================== -->
+
+    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+
+
+    <!-- ==========================================
+         BOOKING JS
+    =========================================== -->
+
+    <script src="../js/booking.js"></script>
+
+  </body>
+</html>

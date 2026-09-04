@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Fresha Saloon</title>
+
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+
+  <body>
+    <!-- ==============================
+       NAVBAR
+  =============================== -->
+
+    <header class="navbar">
+      <h2>Fresha Saloon</h2>
+
+      <nav>
+        <a href="index.html"> Home </a>
+
+        <a href="saloonWork/appointment.html"> Appointments </a>
+
+        <a href="profile.html"> Profile </a>
+
+        <a href="login.html" id="loginLink"> Login </a>
+
+        <button id="logoutButton" onclick="logout()">Logout</button>
+      </nav>
+    </header>
+
+    <!-- ==============================
+       HERO
+  =============================== -->
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Book local selfcare services</h1>
+
+        <p>
+          Discover top-rated salons, barbers, wellness studios and beauty
+          experts.
+        </p>
+
+        <!-- ==========================
+           SEARCH BAR
+      =========================== -->
+
+        <div class="search-box">
+          <!-- Treatment -->
+
+          <div class="search-item">
+            <span class="search-icon"> 🔍 </span>
+
+            <input type="text" id="searchInput" placeholder="All treatments" />
+          </div>
+
+          <!-- Location -->
+
+          <div class="search-item">
+            <span class="search-icon"> 📍 </span>
+
+            <input
+              type="text"
+              id="locationInput"
+              placeholder="Current location"
+            />
+          </div>
+
+          <!-- Date -->
+
+          <div class="search-item">
+            <span class="search-icon"> 📅 </span>
+
+            <input type="date" id="dateInput" />
+          </div>
+
+          <!-- Search button -->
+
+          <button id="searchButton" class="search-btn">Search</button>
+        </div>
+
+        <!-- Small information -->
+
+        <div class="hero-info">
+          <strong> Find your perfect salon </strong>
+
+          <span> and book your appointment easily </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+       AVAILABLE SALONS
+  =============================== -->
+
+    <section id="salons" class="container">
+      <h2>Available Salons</h2>
+
+      <!-- Dynamic salons will be inserted here -->
+
+      <div id="saloonList" class="card-container">
+        <p>Loading salons...</p>
+      </div>
+    </section>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- ==============================
+       INDEX JAVASCRIPT
+  =============================== -->
+
+    <script src="./js/index.js"></script>
+  </body>
+</html>

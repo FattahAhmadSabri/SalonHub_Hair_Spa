@@ -1,0 +1,156 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Page */
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+
+/* Main container */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+/* Register card */
+.auth-card {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Logo */
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Heading */
+.auth-card h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* Subtitle */
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Inputs */
+.form-group input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 15px;
+  outline: none;
+}
+
+/* Input focus */
+.form-group input:focus {
+  border-color: #222;
+}
+
+/* Button */
+.auth-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 7px;
+  background: #222;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* Button hover */
+.auth-button:hover {
+  background: #444;
+}
+
+/* Disabled button */
+.auth-button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* Message */
+.message {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.message.error {
+  color: red;
+}
+
+.message.success {
+  color: green;
+}
+
+/* Footer */
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #666;
+}
+
+.auth-footer a {
+  color: #222;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .auth-container {
+    padding: 20px;
+  }
+
+  .auth-card {
+    padding: 25px 20px;
+  }
+
+  .auth-card h1 {
+    font-size: 24px;
+  }
+}
