@@ -7,6 +7,7 @@ const {
   getTopRatedSaloonsController
 } = require("../controller/saloonController");
 const authMiddleware = require("../middleware/authMiddleware");
+const authorizeRoles = require("../middleware/roleMiddleware");
 const router = express.Router();
 const upload = require("../middleware/multerMiddleware");
 
@@ -14,6 +15,7 @@ router.post(
   "/saloon/add",
   upload.single("image"),
   authMiddleware,
+  authorizeRoles("admin"),
   addSaloonController,
 );
 

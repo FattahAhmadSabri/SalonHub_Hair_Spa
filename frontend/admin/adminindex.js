@@ -14,6 +14,33 @@ if (!token) {
   window.location.href = "../login.html";
 }
 
+const userData = localStorage.getItem("user");
+
+if (!token || !userData) {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  window.location.href = "../index.html";
+} else {
+  try {
+    const user = JSON.parse(userData);
+
+    if (user.role !== "admin") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      window.location.href = "../index.html";
+    }
+  } catch (error) {
+    console.error("Invalid user data");
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    window.location.href = "../index.html";
+  }
+}
+
 // =========================
 // ELEMENTS
 // =========================
@@ -111,17 +138,11 @@ const loadSalons = async () => {
   try {
     table.innerHTML = `
       <tr>
-        <td colspan="4">
-          Loading salons...
-        </td>
+        <td colspan="4">Loading salons...</td>
       </tr>
     `;
 
-    console.log("Calling salon API...");
-
     const response = await axios.get(`${API_BASE_URL}/saloon/all`);
-
-    console.log("Salon API response:", response.data);
 
     const salons = response.data.data;
 
@@ -130,12 +151,9 @@ const loadSalons = async () => {
     if (!salons || salons.length === 0) {
       table.innerHTML = `
         <tr>
-          <td colspan="4">
-            No salons found.
-          </td>
+          <td colspan="4">No salons found.</td>
         </tr>
       `;
-
       return;
     }
 
@@ -145,45 +163,239 @@ const loadSalons = async () => {
       const row = document.createElement("tr");
 
       row.innerHTML = `
-        <td>
-          ${salon.name || "-"}
-        </td>
+        <td>${salon.name || "-"}</td>
+
+        <td>${salon.city || "-"}</td>
+
+        <td>${salon.address || "-"}</td>
 
         <td>
-          ${salon.city || "-"}
-        </td>
-
-        <td>
-          ${salon.address || "-"}
-        </td>
-
-        <td>
-
-          <button class="action-button">
+          <button
+            class="action-button edit-button"
+            data-id="${salon.id}"
+          >
             Edit
           </button>
 
-          <button class="action-button delete-button">
-            Delete
+          <button
+            class="action-button service-button"
+            data-id="${salon.id}"
+          >
+            + Service
           </button>
 
+          <button
+            class="action-button delete-button"
+            data-id="${salon.id}"
+          >
+            Delete
+          </button>
         </td>
       `;
 
       table.appendChild(row);
+    });
+
+    // + Service button
+    document.querySelectorAll(".service-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const saloonId = button.dataset.id;
+
+        openServiceModal(saloonId);
+      });
     });
   } catch (error) {
     console.error("Error loading salons:", error);
 
     table.innerHTML = `
       <tr>
-        <td colspan="4">
-          Unable to load salons.
-        </td>
+        <td colspan="4">Unable to load salons.</td>
       </tr>
     `;
   }
 };
+
+const openServiceModal = (saloonId) => {
+  document.getElementById("serviceForm").reset();
+
+  document.getElementById("serviceSaloonId").value = saloonId;
+
+  document.getElementById("serviceMessage").textContent = "";
+
+  document.getElementById("serviceModal").classList.remove("hidden");
+};
+
+const closeServiceModal = () => {
+  document.getElementById("serviceModal").classList.add("hidden");
+
+  document.getElementById("serviceForm").reset();
+};
+
+document
+  .getElementById("closeServiceModal")
+  .addEventListener("click", closeServiceModal);
+
+document
+  .getElementById("cancelServiceButton")
+  .addEventListener("click", closeServiceModal);
+
+document
+  .getElementById("serviceForm")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const saloonId = document.getElementById("serviceSaloonId").value;
+
+    if (!saloonId) {
+      alert("Salon ID is missing");
+      return;
+    }
+
+    await addService(saloonId);
+  });
+
+const addService = async (saloonId) => {
+  const token = localStorage.getItem("token");
+
+  const serviceData = {
+    saloonId: saloonId,
+    name: document.getElementById("serviceName").value.trim(),
+    price: Number(document.getElementById("servicePrice").value),
+    duration: Number(document.getElementById("serviceDuration").value),
+    description: document.getElementById("serviceDescription").value.trim(),
+  };
+
+  console.log("ADD SERVICE DATA:", serviceData);
+  console.log("TOKEN:", token);
+
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/saloon-service/add`,
+      serviceData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    console.log("ADD SERVICE RESPONSE:", response.data);
+
+    if (response.data.success) {
+      alert("Service added successfully");
+
+      document.getElementById("serviceForm").reset();
+      document.getElementById("serviceModal").classList.add("hidden");
+
+      await loadServices();
+    }
+  } catch (error) {
+    console.error("ADD SERVICE ERROR:", error);
+
+    console.log("STATUS:", error.response?.status);
+    console.log("RESPONSE:", error.response?.data);
+
+    alert(error.response?.data?.message || "Unable to add service");
+  }
+};
+
+// ================= ADD SALON =================
+
+const addSalonButton = document.getElementById("addSalonButton");
+const salonModal = document.getElementById("salonModal");
+const closeSalonModal = document.getElementById("closeSalonModal");
+const cancelSalonButton = document.getElementById("cancelSalonButton");
+const salonForm = document.getElementById("salonForm");
+const salonMessage = document.getElementById("salonMessage");
+const saveSalonButton = document.getElementById("saveSalonButton");
+
+// OPEN MODAL
+
+addSalonButton.addEventListener("click", () => {
+  salonForm.reset();
+  salonMessage.textContent = "";
+
+  salonModal.classList.remove("hidden");
+});
+
+// CLOSE MODAL
+
+closeSalonModal.addEventListener("click", () => {
+  salonModal.classList.add("hidden");
+});
+
+cancelSalonButton.addEventListener("click", () => {
+  salonModal.classList.add("hidden");
+});
+
+// CLOSE WHEN CLICKING OUTSIDE
+
+salonModal.addEventListener("click", (event) => {
+  if (event.target === salonModal) {
+    salonModal.classList.add("hidden");
+  }
+});
+
+// SUBMIT FORM
+
+salonForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "../index.html";
+    return;
+  }
+
+  try {
+    saveSalonButton.disabled = true;
+    saveSalonButton.textContent = "Adding...";
+
+    salonMessage.textContent = "";
+
+    const formData = new FormData(salonForm);
+
+    const response = await axios.post(
+      "http://localhost:4500/saloon/add",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      },
+    );
+
+    if (response.data.success) {
+      salonMessage.textContent = "Salon added successfully.";
+
+      salonForm.reset();
+
+      // Close after successful creation
+      setTimeout(() => {
+        salonModal.classList.add("hidden");
+        salonMessage.textContent = "";
+      }, 800);
+
+      // Reload salon list
+      loadSalons();
+    } else {
+      salonMessage.textContent =
+        response.data.message || "Failed to add salon.";
+    }
+  } catch (error) {
+    console.error("Add salon error:", error);
+
+    salonMessage.textContent =
+      error.response?.data?.message ||
+      "Something went wrong while adding salon.";
+  } finally {
+    saveSalonButton.disabled = false;
+    saveSalonButton.textContent = "Add Salon";
+  }
+});
 
 // =========================
 // LOAD SERVICES
@@ -195,9 +407,7 @@ const loadServices = async () => {
   try {
     table.innerHTML = `
       <tr>
-        <td colspan="5">
-          Loading services...
-        </td>
+        <td colspan="5">Loading services...</td>
       </tr>
     `;
 
@@ -207,20 +417,16 @@ const loadServices = async () => {
 
     console.log("Services API response:", response.data);
 
-    const services = response.data.data;
+    const services = response.data.data || [];
 
-    document.getElementById("totalServices").textContent =
-      services?.length || 0;
+    document.getElementById("totalServices").textContent = services.length;
 
-    if (!services || services.length === 0) {
+    if (services.length === 0) {
       table.innerHTML = `
         <tr>
-          <td colspan="5">
-            No services found.
-          </td>
+          <td colspan="5">No services found.</td>
         </tr>
       `;
-
       return;
     }
 
@@ -243,23 +449,49 @@ const loadServices = async () => {
         </td>
 
         <td>
-          ${service.saloonId || "-"}
+          ${service.saloon?.name || "-"}
         </td>
 
         <td>
-
-          <button class="action-button">
+          <button
+            class="action-button edit-service-button"
+            data-id="${service.id}"
+          >
             Edit
           </button>
 
-          <button class="action-button delete-button">
+          <button
+            class="action-button delete-service-button"
+            data-id="${service.id}"
+          >
             Delete
           </button>
-
         </td>
       `;
 
       table.appendChild(row);
+    });
+
+    // Edit buttons
+    document.querySelectorAll(".edit-service-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const serviceId = button.dataset.id;
+
+        const service = services.find((item) => item.id === serviceId);
+
+        if (service) {
+          openEditServiceModal(service);
+        }
+      });
+    });
+
+    // Delete buttons
+    document.querySelectorAll(".delete-service-button").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const serviceId = button.dataset.id;
+
+        await deleteService(serviceId);
+      });
     });
   } catch (error) {
     console.error("Error loading services:", error);
@@ -802,7 +1034,3 @@ loadSalons();
 loadServices();
 
 loadUsers();
-
-// We don't call appointments here
-// because the endpoint may be different.
-// It will load when you click Appointments.

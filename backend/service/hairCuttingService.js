@@ -1,11 +1,11 @@
-const {SaloonFacility}= require("../model/index")
+const { SaloonFacility, Saloon } = require("../model/index");
 
 const addSaloonService = async (
   saloonId,
   name,
   price,
   duration,
-  description
+  description,
 ) => {
   const saloonService = await SaloonFacility.create({
     saloonId,
@@ -18,10 +18,15 @@ const addSaloonService = async (
   return saloonService;
 };
 
-
 const getAllSaloonServices = async () => {
-  const saloonServices = await SaloonFacility.findAll();
-
+  const saloonServices = await SaloonFacility.findAll({
+    include: [
+      {
+        model: Saloon,
+        attributes: ["id", "name"],
+      },
+    ],
+  });
   return saloonServices;
 };
 
@@ -35,13 +40,7 @@ const getSaloonServiceById = async (id) => {
   return saloonService;
 };
 
-const updateSaloonService = async (
-  id,
-  name,
-  price,
-  duration,
-  description
-) => {
+const updateSaloonService = async (id, name, price, duration, description) => {
   const saloonService = await SaloonFacility.findByPk(id);
 
   if (!saloonService) {
@@ -70,7 +69,6 @@ const deleteSaloonService = async (id) => {
   return saloonService;
 };
 
-
 module.exports = {
   addSaloonService,
   getAllSaloonServices,
@@ -78,4 +76,3 @@ module.exports = {
   updateSaloonService,
   deleteSaloonService,
 };
-

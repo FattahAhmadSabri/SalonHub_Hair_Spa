@@ -62,7 +62,7 @@ Fresha_Saloon/
 │   │   ├── emailRoutes.js
 │   │   ├── hairCuttingRoute.js
 │   │   ├── paymentsRoute.js
-│   │   └── reviewRoute.js
+│   │   └── replyRoute.js
 │   ├── service/
 │   ├── utils/
 │   ├── .env
@@ -414,15 +414,14 @@ BREVO_SENDER=your_verified_sender_email
 
 ---
 
+# Reply APIs
 
-# Review APIs
+The current route file uses `recipeId` in the reply endpoints.
 
-The application provides CRUD operations for salon reviews and ratings.
-
-## Add Review
+## Add Reply
 
 ```http
-POST /review/:saloonId
+POST /reply/:recipeId
 ```
 
 Authentication: Required.
@@ -438,7 +437,7 @@ Creates a reply associated with the provided `recipeId`.
 ## Get Reply
 
 ```http
-GET /review/
+GET /reply/
 ```
 
 Authentication: Not required.
@@ -448,17 +447,17 @@ Returns replies through the reply controller.
 ## Get All Replies by Recipe ID
 
 ```http
-GET /review/:recipeId
+GET /reply/:recipeId
 ```
 
 Authentication: Not required.
 
 Returns replies associated with a recipe ID.
 
-## Update review
+## Update Reply
 
 ```http
-PATCH /review/:id
+PATCH /reply/:id
 ```
 
 Authentication: Required.
@@ -475,7 +474,7 @@ Updates a reply.
 ## Delete Reply
 
 ```http
-DELETE /review/:id
+DELETE /reply/:id
 ```
 
 Authentication: Required.
@@ -513,9 +512,9 @@ Current route-level role restrictions:
 | Get Appointment by ID | user, staff |
 | Update Appointment | staff, user |
 | Delete Appointment | user, staff, admin |
-| Add Review | user |
-| Update Review | user, admin |
-| Delete Review | user, admin |
+| Add Reply | user |
+| Update Reply | user, admin |
+| Delete Reply | user, admin |
 
 ---
 

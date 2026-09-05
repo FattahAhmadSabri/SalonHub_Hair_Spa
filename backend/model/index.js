@@ -36,14 +36,11 @@ Review.belongsTo(User, {
 // Saloon → Reviews
 Saloon.hasMany(Review, {
   foreignKey: "saloonId",
-  as: "reviews",
 });
 
 Review.belongsTo(Saloon, {
   foreignKey: "saloonId",
-  as: "saloon",
 });
-
 // User → Appointments
 User.hasMany(Appointment, {
   foreignKey: "userId",

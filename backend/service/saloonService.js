@@ -1,9 +1,8 @@
 const { Saloon, Review } = require("../model/index");
-const s3 = require("../utils/s3Config")
+const s3 = require("../utils/s3Config");
+const { fn, col, literal } = require("sequelize");
 
 const { PutObjectCommand } = require("@aws-sdk/client-s3");
-
-
 
 const addSaloonService = async (
   name,
@@ -17,7 +16,6 @@ const addSaloonService = async (
 ) => {
   let imageUrl = null;
 
-  
   if (image) {
     const fileKey = `saloons/${Date.now()}-${image.originalname}`;
 
@@ -28,7 +26,7 @@ const addSaloonService = async (
       ContentType: image.mimetype,
     };
 
-    await s3  .send(new PutObjectCommand(uploadParams));
+    await s3.send(new PutObjectCommand(uploadParams));
 
     imageUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileKey}`;
   }
@@ -42,13 +40,10 @@ const addSaloonService = async (
     city,
     duration,
     image: imageUrl,
-    
   });
 
   return saloon;
 };
-
-
 
 const getSaloonByCity = (city) => {
   const response = Saloon.findAll({
@@ -63,14 +58,8 @@ const getTopRatedSaloonsService = async () => {
   const saloons = await Saloon.findAll({
     attributes: {
       include: [
-        [
-          fn("AVG", col("reviews.ratings")),
-          "averageRating",
-        ],
-        [
-          fn("COUNT", col("reviews.id")),
-          "totalReviews",
-        ],
+        [fn("AVG", col("Reviews.ratings")), "averageRating"],
+        [fn("COUNT", col("Reviews.id")), "totalReviews"],
       ],
     },
 
@@ -84,30 +73,25 @@ const getTopRatedSaloonsService = async () => {
 
     group: ["Saloon.id"],
 
-    order: [
-      [literal("averageRating"), "DESC"],
-    ],
+    order: [[literal("averageRating"), "DESC"]],
   });
 
   return saloons;
 };
 
+const getAllSaloon = () => {
+  const response = Saloon.findAll();
+  return response;
+};
 
-
-
-const getAllSaloon = ()=>{
-  const response =Saloon.findAll()
-  return response
-}
-
-const getSaloonById = (id)=>{
-  const response =Saloon.findByPk(id)
-  return response
-}
+const getSaloonById = (id) => {
+  const response = Saloon.findByPk(id);
+  return response;
+};
 module.exports = {
   addSaloonService,
   getSaloonByCity,
   getAllSaloon,
   getSaloonById,
-  getTopRatedSaloonsService
+  getTopRatedSaloonsService,
 };
