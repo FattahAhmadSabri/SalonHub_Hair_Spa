@@ -13,6 +13,7 @@ const appointmentRoute = require("./route/appointmentRoute");
 const hairCuttingRoute = require("./route/hairCuttingRoute");
 const paymentsRoute = require("./route/paymentsRoute");
 const appointmentReminderCron = require("./cron/appointmentReminderCron");
+const reviewRoute = require("./route/reviewRoute");
 
 app.get("/", (req, res) => {
   res.send("server is working");
@@ -24,6 +25,7 @@ app.use("/", saloonRoute);
 app.use("/", appointmentRoute);
 app.use("/", hairCuttingRoute);
 app.use("/", paymentsRoute);
+app.use("/", reviewRoute);
 
 sequelize
   .sync()
