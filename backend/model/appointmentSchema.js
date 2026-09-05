@@ -19,14 +19,13 @@ const Appointment = sequelize.define(
       type: DataTypes.TIME,
       allowNull: false,
     },
+    reminder1hSent: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
 
     status: {
-      type: DataTypes.ENUM(
-        "pending",
-        "confirmed",
-        "completed",
-        "cancelled"
-      ),
+      type: DataTypes.ENUM("pending", "confirmed", "completed", "cancelled"),
       defaultValue: "pending",
       allowNull: false,
     },
@@ -34,7 +33,7 @@ const Appointment = sequelize.define(
   {
     tableName: "appointments",
     timestamps: true,
-  }
+  },
 );
 
 module.exports = Appointment;

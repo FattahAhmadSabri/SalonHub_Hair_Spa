@@ -12,11 +12,13 @@ const saloonRoute = require("./route/saloonRoute");
 const appointmentRoute = require("./route/appointmentRoute");
 const hairCuttingRoute = require("./route/hairCuttingRoute");
 const paymentsRoute = require("./route/paymentsRoute");
+const appointmentReminderCron = require("./cron/appointmentReminderCron");
 
 app.get("/", (req, res) => {
   res.send("server is working");
 });
 
+appointmentReminderCron();
 app.use("/", userRoute);
 app.use("/", saloonRoute);
 app.use("/", appointmentRoute);

@@ -1,36 +1,63 @@
-const { BrevoClient } = require("@getbrevo/brevo");
+const SibApiV3Sdk = require("sib-api-v3-sdk");
 
-const brevo = new BrevoClient({
-  apiKey: process.env.BREVO_API_KEY,
-});
+const client = SibApiV3Sdk.ApiClient.instance;
 
-const sendEmail = async (to, subject, htmlContent) => {
-  try {
-    const response = await brevo.transactionalEmails.sendTransacEmail({
-      sender: {
-        name: "Expense Tracker",
-        email: process.env.BREVO_SENDER,
+const apiKey = client.authentications["api-key"];
+apiKey.apiKey = process.env.BREVO_API_KEY;
+
+const tranEmailApi = new SibApiV3Sdk.TransactionalEmailsApi();
+
+const sendAppointmentReminder = async ({
+  email,
+  customerName,
+  salonName,
+  salonAddress,
+  serviceName,
+  date,
+  startTime,
+}) => {
+  const sendSmtpEmail = {
+    sender: {
+      name: "Fresha Salon",
+      email: process.env.BREVO_SENDER,
+    },
+
+    to: [
+      {
+        email,
+        name: customerName,
       },
+    ],
 
-      to: [
-        {
-          email: to,
-        },
-      ],
+    subject: "Your salon appointment is in 1 hour",
 
-      subject,
+    htmlContent: `
+      <h2>Appointment Reminder</h2>
 
-      htmlContent,
-    });
+      <p>Hello ${customerName},</p>
 
-    console.log("Email Sent");
-    
+      <p>
+        This is a reminder that your salon appointment
+        is starting in approximately <strong>1 hour</strong>.
+      </p>
 
-    return response;
-  } catch (error) {
-   
-    throw error;
-  }
+      <p>
+        <strong>Salon:</strong> ${salonName}<br>
+        <strong>Service:</strong> ${serviceName}<br>
+        <strong>Date:</strong> ${date}<br>
+        <strong>Time:</strong> ${startTime}<br>
+        <strong>Address:</strong> ${salonAddress}
+      </p>
+
+      <p>
+        Please arrive a few minutes early.
+      </p>
+
+      <p>Thank you for choosing Fresha Salon.</p>
+    `,
+  };
+
+  return await tranEmailApi.sendTransacEmail(sendSmtpEmail);
 };
 
-module.exports = sendEmail;
+module.exports = sendAppointmentReminder;
