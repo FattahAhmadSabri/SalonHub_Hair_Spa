@@ -1,4 +1,4 @@
-const { Saloon } = require("../model/index");
+const { Saloon, Review } = require("../model/index");
 const s3 = require("../utils/s3Config")
 
 const { PutObjectCommand } = require("@aws-sdk/client-s3");
@@ -59,6 +59,40 @@ const getSaloonByCity = (city) => {
   return response;
 };
 
+const getTopRatedSaloonsService = async () => {
+  const saloons = await Saloon.findAll({
+    attributes: {
+      include: [
+        [
+          fn("AVG", col("reviews.ratings")),
+          "averageRating",
+        ],
+        [
+          fn("COUNT", col("reviews.id")),
+          "totalReviews",
+        ],
+      ],
+    },
+
+    include: [
+      {
+        model: Review,
+        attributes: [],
+        required: false,
+      },
+    ],
+
+    group: ["Saloon.id"],
+
+    order: [
+      [literal("averageRating"), "DESC"],
+    ],
+  });
+
+  return saloons;
+};
+
+
 
 
 const getAllSaloon = ()=>{
@@ -74,5 +108,6 @@ module.exports = {
   addSaloonService,
   getSaloonByCity,
   getAllSaloon,
-  getSaloonById
+  getSaloonById,
+  getTopRatedSaloonsService
 };

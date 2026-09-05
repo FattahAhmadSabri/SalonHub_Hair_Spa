@@ -3,7 +3,7 @@ const {
   addSaloonController,
   getSaloonbyCityController,
   getAllSaloonController,
-  getSaloonByIdController
+  getSaloonByIdController,
 } = require("../controller/saloonController");
 const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
@@ -19,5 +19,6 @@ router.post(
 router.get("/saloon/get", getSaloonbyCityController);
 router.get("/saloon/all", getAllSaloonController);
 router.get("/saloon/get/:id", getSaloonByIdController);
+router.get("/saloon/top-rated", getTopRatedSaloonsController);
 
 module.exports = router;

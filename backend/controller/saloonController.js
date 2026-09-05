@@ -2,7 +2,8 @@ const {
   addSaloonService,
   getSaloonByCity,
   getAllSaloon,
-  getSaloonById
+  getSaloonById,
+  getTopRatedSaloonsService
 } = require("../service/saloonService");
 const {
   successResponse,
@@ -59,4 +60,23 @@ const getSaloonByIdController = async(req,res)=>{
   }
 }
 
-module.exports = { addSaloonController,getAllSaloonController, getSaloonbyCityController, getSaloonByIdController };
+const getTopRatedSaloonsController = async (req, res) => {
+  try {
+    const saloons = await getTopRatedSaloonsService();
+
+    return res.status(200).json({
+      success: true,
+      message: "Top rated saloons fetched successfully",
+      data: saloons,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { addSaloonController,getAllSaloonController, getSaloonbyCityController, getSaloonByIdController,getTopRatedSaloonsController };
