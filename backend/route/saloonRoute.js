@@ -4,6 +4,7 @@ const {
   getSaloonbyCityController,
   getAllSaloonController,
   getSaloonByIdController,
+  getTopRatedSaloonsController
 } = require("../controller/saloonController");
 const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
